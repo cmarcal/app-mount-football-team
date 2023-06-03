@@ -48,9 +48,9 @@ export default function Page({ params }: { params: {id: string}}) {
   },[players, updatePlayers])
 
   return (
-    <main className="flex flex-col gap-4 h-full w-screen p-8 items-center overflow-auto">
-      <h1 className="text-xl">Bem vindo ao seu campo!</h1>
-      <hr className="w-4/12 text-center border-sky-500" />
+    <main className="bg-[url('../img/campo.jpeg')] bg-no-repeat bg-cover flex flex-col gap-6 h-full w-screen p-8 items-center overflow-auto">
+      <h1 className="text-xl font-semibold uppercase text-slate-50">Bem-vindo ao seu campo!</h1>
+      <hr className="w-4/12 text-center border-yellow-500" />
 
       <ArrivalList players={players} removePlayer={removePlayer} />
       <MemberQueue addPlayer={addPlayer} />

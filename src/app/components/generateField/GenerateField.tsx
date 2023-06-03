@@ -33,9 +33,9 @@ const GenerateField = () => {
   return (
     <div className="flex flex-col items-center gap-y-4">
       <button 
-        className="w-full rounded-md shadow-xl p-3 bg-sky-500 text-slate-50"
+        className="p-2 text-black bg-yellow-500 rounded-full shadow-xl w-60"
         onClick={generateField}>
-          Crie seu campo
+          Monte os times
       </button>
      <FindRoomModal />
     </div>
