@@ -31,7 +31,7 @@ export const MemberQueue = ({ addPlayer } : MemberQueueParams ) => {
             <label htmlFor="mensalista" className="text-sm cursor-pointer">mensalista</label>
           </div>
         </div>
-        <button className="p-1 text-center text-black bg-yellow-500 rounded-md w-100">Adicionar jogador na lista</button>
+        <button disabled={!playerName} className={`p-1 text-center text-black bg-yellow-500 rounded-md w-100 ${playerName ? 'bg-yellow-500 cursor-auto' : 'bg-zinc-400 cursor-not-allowed'}`}>Adicionar jogador na lista</button>
       </form>
     </div>
   )
