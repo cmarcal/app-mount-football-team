@@ -21,14 +21,14 @@ export default function FindRoomModal() {
   }
 
   const goToRoom = (event: FormEvent): void => {
-    const hasRoom = getCookie(ROOM_FIELD_MATCH) === roomName
+    const hasRoom = getCookie(`${ROOM_FIELD_MATCH}${roomName}`) === roomName
 
     if (hasRoom) {
       goToField(roomName)
     } else {
-      event.preventDefault();
       setShowMessageError(true);
     }
+    event.preventDefault();
   }
 
   return (
