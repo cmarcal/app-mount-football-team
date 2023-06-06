@@ -3,12 +3,14 @@
 import { useState } from "react"
 import TeamsList from "../teamsList"
 
-const MAX_PLAYER_PER_TEAM = 6
-const MIN_PLAYERS_MOUNT_TEAM = 12
+interface MountTeamsParam {
+  players: Array<Player>
+  playersByTeam: number
+}
 
-export const MountTeams = ({ players, matchId } : {players: Array<Player>, matchId: string}) => {
+export const MountTeams = ({ players, playersByTeam } : MountTeamsParam) => {
   const [teams, setTeams] = useState<Array<Player[]>>([])
-  const hasPlayers = players.length && players.length >= MIN_PLAYERS_MOUNT_TEAM
+  const hasPlayers = players.length && players.length >= (playersByTeam * 2)
 
   const shuffleFirstTwoTeams = (team1: Player[], team2: Player[]): {firstTeam: Player[], secondTeam: Player[]} => {
     let firstTeam: Player[] = [];
@@ -24,8 +26,8 @@ export const MountTeams = ({ players, matchId } : {players: Array<Player>, match
       [oneTeam[currentIndex], oneTeam[randomIndex]] = [oneTeam[randomIndex], oneTeam[currentIndex]]
     }
 
-    firstTeam = oneTeam.slice(0, 6)
-    secondTeam = oneTeam.slice(6)
+    firstTeam = oneTeam.slice(0, playersByTeam)
+    secondTeam = oneTeam.slice(playersByTeam)
 
     return {
       firstTeam,
@@ -51,7 +53,7 @@ export const MountTeams = ({ players, matchId } : {players: Array<Player>, match
     const playersJoined = [...monthlyPlayers, ...diaristPlayers]
 
     playersJoined.forEach((player: Player) => {
-      const currentTeamFull = mountTeam.length === MAX_PLAYER_PER_TEAM
+      const currentTeamFull = mountTeam.length === playersByTeam
 
       if (currentTeamFull) {
         teams.push([...mountTeam]);

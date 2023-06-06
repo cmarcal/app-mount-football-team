@@ -7,10 +7,14 @@ import { useCallback, useEffect, useState } from "react"
 import MemberQueue from "./components/memberQueue";
 import ArrivalList from "./components/arrivalList";
 import MountTeams from "./components/mountTeams";
+import PlayersByTeam from "./components/playersByTeam";
+
+const DEFAULT_PLAYERS_BY_TEAM = 6;
 
 export default function Page({ params }: { params: {id: string}}) {
 
   const [players, setPlayers] = useState<Array<Player>>([]) 
+  const [playersByTeam, setPlayersByTeam] =  useState(DEFAULT_PLAYERS_BY_TEAM);
 
   useEffect(() => {
     const hasRoom =  getCookie(`${ROOM_FIELD_MATCH}${params.id}`) === params.id
@@ -47,14 +51,29 @@ export default function Page({ params }: { params: {id: string}}) {
     updatePlayers(copyPLayers)
   },[players, updatePlayers])
 
+  const addPlayersByTeam = useCallback(() => {
+    if (playersByTeam < 11) {
+      setPlayersByTeam(playersByTeam + 1)
+    }
+  },[playersByTeam])
+
+  const removePlayersByTeam = useCallback(() => {
+    if (playersByTeam > 1) {
+      setPlayersByTeam(playersByTeam - 1)
+    }
+
+  },[playersByTeam])
+
+
   return (
     <main className="bg-[url('../img/campo.jpeg')] bg-no-repeat bg-cover flex flex-col gap-6 h-full w-screen p-8 items-center overflow-auto">
       <h1 className="text-xl font-semibold uppercase text-slate-50">Bem-vindo ao seu campo!</h1>
       <hr className="w-4/12 text-center border-yellow-500" />
 
       <ArrivalList players={players} removePlayer={removePlayer} />
+      <PlayersByTeam playersByTeam={playersByTeam} addPlayersByTeam={addPlayersByTeam} removePlayersByTeam={removePlayersByTeam} />
       <MemberQueue addPlayer={addPlayer} />
-      <MountTeams players={players} matchId={params.id}/>
+      <MountTeams players={players} playersByTeam={playersByTeam}/>
     </main>
   )
 }

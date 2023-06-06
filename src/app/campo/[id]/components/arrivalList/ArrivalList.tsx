@@ -36,7 +36,7 @@ export const ArrivalList = ({ players, removePlayer }: ArrivalListParams ) => {
 
   return (
     <details id="details" className="relative w-full">
-      <summary className='font-semibold text-slate-50'>Lista de jogadores por ordem de chegada
+      <summary className='font-semibold text-slate-50'>Lista por ordem de chegada
       <br />
       <p className='pt-2 font-normal'>
         {totalMonthly} mensalistas | {totalDiarist} diaristas
