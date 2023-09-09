@@ -8,16 +8,14 @@ import MemberQueue from "./components/memberQueue";
 import ArrivalList from "./components/arrivalList";
 import MountTeams from "./components/mountTeams";
 import PlayersByTeam from "./components/playersByTeam";
-
-const DEFAULT_PLAYERS_BY_TEAM = 6;
+import { useActionPlayers } from "./hooks/useActionPlayers";
 
 export default function Page({ params }: { params: {id: string}}) {
 
-  const [players, setPlayers] = useState<Array<Player>>([]) 
-  const [playersByTeam, setPlayersByTeam] =  useState(DEFAULT_PLAYERS_BY_TEAM);
+  const { players, setPlayers, playersByTeam, addPlayer, removePlayer, addPlayersByTeam, removePlayersByTeam } = useActionPlayers({ roomId: params?.id })
 
   useEffect(() => {
-    const hasRoom =  getCookie(`${ROOM_FIELD_MATCH}${params.id}`) === params.id
+    const hasRoom = getCookie(`${ROOM_FIELD_MATCH}${params.id}`) === params.id
 
     if (!hasRoom) goToHome();
 
@@ -26,44 +24,7 @@ export default function Page({ params }: { params: {id: string}}) {
       const playersParse = JSON.parse(playersInCookie) as Array<Player>
       setPlayers(playersParse)
     }
-  },[params.id])
-
-  const updatePlayers = useCallback((players: Array<Player>) => {
-    const mountCookie = {
-      name: `${PLAYERS_IN_ROOM}${params.id}`,
-      value: JSON.stringify(players),
-    }
-
-    setPlayers(players)
-    setCookie(mountCookie)
-  }, [params.id])
-
-  const addPlayer = useCallback((player: Player): void => {
-    const newPlayers = [...players, player]
-    updatePlayers(newPlayers)
-
-  },[players, updatePlayers])
-
-  const removePlayer = useCallback((positionPlayer: number): void => {
-    const copyPLayers = [...players];
-    copyPLayers.splice(positionPlayer, 1)
-    
-    updatePlayers(copyPLayers)
-  },[players, updatePlayers])
-
-  const addPlayersByTeam = useCallback(() => {
-    if (playersByTeam < 11) {
-      setPlayersByTeam(playersByTeam + 1)
-    }
-  },[playersByTeam])
-
-  const removePlayersByTeam = useCallback(() => {
-    if (playersByTeam > 1) {
-      setPlayersByTeam(playersByTeam - 1)
-    }
-
-  },[playersByTeam])
-
+  },[params.id, setPlayers])
 
   return (
     <main className="bg-[url('../img/campo.jpeg')] bg-no-repeat bg-cover flex flex-col gap-6 h-full w-screen p-8 items-center overflow-auto">

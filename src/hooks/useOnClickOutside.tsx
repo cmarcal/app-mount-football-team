@@ -8,11 +8,9 @@ const useOnClickOutside = (ref: any , handler: Function) => {
     const listener = (event: any) => {
       if (ref instanceof Array) {
         for (const refItem of ref) {
-          // Do nothing if clicking ref's element or descendent elements
           if (isSameTarget(refItem, event)) return;
         }
       } else {
-        // Do nothing if clicking ref's element or descendent elements
         if (isSameTarget(ref, event)) return;
       }
 
