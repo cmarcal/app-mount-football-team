@@ -1,21 +1,21 @@
 'use client';
 
-import { CHARACTERS, ROOM_FIELD_MATCH } from "@/utils/consts";
+import { CHARACTERS, ROOM_FIELD_MATCH, MAX_LENGTH_ID_ROOM } from "@/utils/consts/";
 import { setCookie, getCookie } from "@/utils/cookie";
 import { goToField } from "@/utils/routes";
 
-const GenerateField = () => {
-
-  const createRoom = () => {
-    let result = '';
-    const charactersLength = CHARACTERS.length;
-    let counter = 0;
-    while (counter < 7) {
-      result += CHARACTERS.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
+const createRoom = () => {
+  let result = '';
+  const charactersLength = CHARACTERS.length;
+  let counter = 0;
+  while (counter < MAX_LENGTH_ID_ROOM) {
+    result += CHARACTERS.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
   }
+  return result;
+}
+
+const GenerateField = () => {
 
   const generateField = (): void =>  { 
     const room = createRoom();
@@ -26,8 +26,6 @@ const GenerateField = () => {
     }
     goToField(room)
   }
-
-
 
   return (
     <div className="flex flex-col items-center gap-y-4">

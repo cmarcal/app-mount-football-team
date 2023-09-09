@@ -1,3 +1,4 @@
 export const ROOM_FIELD_MATCH = "ROOM_FIELD_MATCH_"
 export const PLAYERS_IN_ROOM = "PLAYERS_IN_ROOM_"
 export const TEAM_MOUNTED_IN_MATCH = "TEAM_MOUNTED_IN_MATCH_"
+export const MAX_LENGTH_ID_ROOM = 7
