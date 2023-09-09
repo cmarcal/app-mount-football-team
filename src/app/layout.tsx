@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Fute 7',
-  description: 'Ajudar a montar a fila de chegada, montar times, os times da outra',
+  title: 'Monte seu Fut',
+  description: 'Organize seu futebol de maneira simples e sem estresse',
 }
 
 export default function RootLayout({

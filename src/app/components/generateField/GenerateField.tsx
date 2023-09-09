@@ -3,7 +3,6 @@
 import { CHARACTERS, ROOM_FIELD_MATCH } from "@/utils/consts";
 import { setCookie, getCookie } from "@/utils/cookie";
 import { goToField } from "@/utils/routes";
-import FindRoomModal from "../findRoomModal";
 
 const GenerateField = () => {
 
@@ -35,11 +34,9 @@ const GenerateField = () => {
       <button 
         className="p-2 text-black bg-yellow-500 rounded-full shadow-xl w-60"
         onClick={generateField}>
-          Monte os times
+          Monte seu fut
       </button>
-     <FindRoomModal />
     </div>
-
   )
 }
 
